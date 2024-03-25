@@ -47,7 +47,7 @@ class GenOpsClient:
         try:
             response = requests.post(self.endpoint_url, json=payload, verify=True)
             response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
-            return response
+            return response.json()
         except requests.exceptions.RequestException as e:
             logging.error(f"Error in asynchronous request: {e}")
 
