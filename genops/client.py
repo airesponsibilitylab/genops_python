@@ -18,7 +18,7 @@ class GenOpsClient:
 
     def submit(self, **kwargs):
         payload = self.build_payload(**kwargs)
-        self.send_request(payload)
+        return self.send_request(payload)
 
     def submit_async(self, **kwargs):
         payload = self.build_payload(**kwargs)
@@ -47,6 +47,7 @@ class GenOpsClient:
         try:
             response = requests.post(self.endpoint_url, json=payload, verify=True)
             response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
+            return response
         except requests.exceptions.RequestException as e:
             logging.error(f"Error in asynchronous request: {e}")
 
